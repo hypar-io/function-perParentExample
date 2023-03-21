@@ -1,0 +1,70 @@
+{
+  "$schema": "https://hypar.io/Schemas/Function.json",
+  "id": "2009be31-acc8-4026-87e3-244f3a28afbb",
+  "name": "Per Parent Overrides",
+  "description": "The PerParentOverrides function.",
+  "language": "C#",
+  "element_types": [
+    "https://schemas.hypar.io/ParentElement.json",
+    "https://schemas.hypar.io/ChildElement.json"
+  ],
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "Geometric Parent": {
+        "type": "boolean"
+      }
+    }
+  },
+  "overrides": {
+    "Children": {
+      "perParent": "ParentElement",
+      "context": "[*discriminator=Elements.ChildElement]",
+      "identity": {
+        "Add Id": {
+          "type": "string"
+        }
+      },
+      "behaviors": {
+        "add": {
+          "schema": {
+            "ParentElement": {
+              "$hyparRelation": {
+                "$ref": "https://prod-api.hypar.io/schemas/ParentElement"
+              },
+              "type": "object",
+              "properties": {
+                "Name": {
+                  "type": "string"
+                }
+              }
+            },
+            "Transform": {
+              "$ref": "https://prod-api.hypar.io/schemas/Transform"
+            }
+          }
+        },
+        "remove": true
+      },
+      "schema": {
+        "ParentElement": {
+          "$hyparRelation": {
+            "$ref": "https://prod-api.hypar.io/schemas/ParentElement"
+          },
+          "type": "object",
+          "properties": {
+            "Name": {
+              "type": "string"
+            }
+          }
+        },
+        "Transform": {
+          "$ref": "https://prod-api.hypar.io/schemas/Transform"
+        }
+      }
+    }
+  },
+  "repository_url": "https://github.com/hypar-io/function",
+  "last_updated": "0001-01-01T00:00:00",
+  "cli_version": "1.5.0-alpha.4"
+}
